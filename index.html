@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Schedule Creator</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        table, td, th {
-            border: 2px solid black;
-            border-collapse: collapse;
-        }
-    </style>
 </head>
-<!--Hello! This is a comment in the website.-->
 
 <body>
-    <h1 style="text-align: center;">Welcome to My App!</h1>
-    <div id="app"></div>
+    <h1 style="text-align: center;">Russian Roulette Simulator!</h1>
+    <div id="images">
+        <img src="images/Revolver.png" style="width:300px;" id="revolver">
+    </div>
+    <div id="text">
+        <div id="app"></div>
+        <div id="percent"></div>
+    </div>
+    <div id="buttons">
+        <button onclick="spinBarrel()" id="spinBarrel">Insert Bullet & Spin the Barrel!</button>
+        <br><br>
+        <button onclick="pullTrigger()" id="pullTrigger">Pull the Trigger!</button>
+    </div>
     <script src="script.js"></script>
-    <table style="align-items: end;">
-        <tr>
-            <th>Name</th>
-            <th>Height (ft)</th>
-            <th>Weight (lbs)</th>
-        </tr>
-        <tr>
-            <td>Mark</td>
-            <td>5'9"</td>
-            <td>180</td>
-        </tr>
-    </table>
 </body>
 
 </html>

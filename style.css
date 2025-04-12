@@ -6,7 +6,21 @@ h1 {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: firebrick;
     padding: 20px;
+    color:white;
 }
-body {
-    background-color: green;
+#images {
+    text-align: center;
+}
+#buttons {
+    align-items: center;
+    text-align: center;
+    button {
+        font-family: 'Courier New', Courier, monospace;
+    }
+}
+#text {
+    font-family: cursive;
+    text-align: center;
+    padding-bottom: 30px;
+    color: rgb(0, 0, 0);
 }
