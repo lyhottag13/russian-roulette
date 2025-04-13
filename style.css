@@ -17,16 +17,18 @@ h1 {
     align-items: center;
     text-align: center;
     button {
-        font: 100px;
-        height: 100px;
+        font-size: large;
+        height: 60px;
         font-family: 'Courier New', Courier, monospace;
     }
 }
 #checkbox {
+    font-size: large;
     padding-top: 20px;
     text-align: center;
 }
 #text {
+    font-size: x-large;
     font-family: cursive;
     text-align: center;
     padding-bottom: 30px;

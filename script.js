@@ -68,7 +68,7 @@ function setTitle() {
 }
 function setDeathText() {
   if (shoot) {
-    percent.innerHTML = (childFriendlyMode) ? "You nerfed!" : "You died!";
+    percent.innerHTML = (childFriendlyMode) ? "You nerf or nothinged!" : "You died!";
   }
 }
 function playGunshot() {
