@@ -2,35 +2,39 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Russian Roulette Simulator</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="images/Smile Face.ico">
+
+    <meta name="description" content="Play Russian Roulette! Feel the thrill without the risk of death!">
+    <meta name="keywords" content="Russian Roulette, online, game, online game, roulette, risk, simulator, Russian">
+    <meta name="author" content="Lyhottag13">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Russian Roulette Simulator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="images/Smile Face.ico">
 </head>
 
 <body>
-  <h1 id="header">Russian Roulette Simulator!</h1>
-  <div id="images">
-    <img src="images/Revolver.png" style="width:500px;" id="revolver">
-  </div>
-  <div id="text">
-    <div id="app"><br></div>
-    <div id="percent"><br></div>
-    <div id="test"></div>
-  </div>
-  <div id="buttons">
-    <button onclick="spinBarrel()" id="spinBarrel">Insert Bullet & Spin the Barrel!</button>
-    <br><br>
-    <button onclick="pullTrigger()" id="pullTrigger" disabled="true">Pull the Trigger!</button>
-    <br><br>
-    <label>
-      <input onchange="setChildFriendlyMode()" type="checkbox" id="checkbox">Child-friendly mode
-    </label>
-    <br><br>
-    <button onclick="muteSFX()" id="muteSFX">Mute SFX</button>
-    <button onclick="muteMusic()" id="muteMusic">Mute Music</button>
-  </div>
-  <script src="script.js"></script>
+    <h1 id="header">Russian Roulette Simulator!</h1>
+    <div id="images">
+        <img src="images/Revolver.png" style="width:500px;" id="revolver">
+    </div>
+    <div id="text">
+        <div id="app"><br></div>
+        <div id="percent"><br></div>
+    </div>
+    <div id="buttons">
+        <button onclick="spinBarrel()" id="spinBarrel">Insert Bullet & Spin the Barrel!</button>
+        <br><br>
+        <button onclick="pullTrigger()" id="pullTrigger" disabled="true">Pull the Trigger!</button>
+        <br><br>
+        <label>
+            <input onchange="setChildFriendlyMode()" type="checkbox" id="checkbox">Child-Friendly Mode
+        </label>
+        <br><br>
+        <button onclick="muteSFX()" id="muteSFX">Mute SFX</button>
+        <button onclick="muteMusic()" id="muteMusic">Mute Music</button>
+    </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
