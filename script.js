@@ -9,7 +9,9 @@ const pullTriggerButton = document.getElementById("pullTrigger");
 const spinBarrelButton = document.getElementById("spinBarrel");
 const revolverImage = document.getElementById("revolver");
 const checkbox = document.getElementById("checkbox");
+const music = new Audio("audio/mafia.mp3");
 function spinBarrel() {
+  playMusic();
   shoot = false;
   playSpin();
   setGun();
@@ -26,6 +28,7 @@ function pullTrigger() {
     bullet--;
     timesSpun++;
     if (bullet === 0) {
+      pauseMusic();
       playGunshot();
       shoot = true;
       setGun();
@@ -82,4 +85,11 @@ function playClick() {
 function playSpin() {
   const spin = (childFriendlyMode) ? new Audio("audio/nerfspin.mp3") : new Audio("audio/spin.mp3");
   spin.play();
+}
+function playMusic() {
+  music.play();
+}
+function pauseMusic() {
+  music.pause();
+  music.currentTime = 0;
 }
