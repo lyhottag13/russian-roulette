@@ -23,6 +23,7 @@ function preloadSFX(audioList) {
         const audioItem = new Audio();
         audioItem.src = "audio/" + `${element}.mp3`;
         audioItem.preload = "auto";
+        audioItem.load();
         audio[element] = audioItem;
     })
 }
