@@ -12,6 +12,18 @@ const spinBarrelButton = document.getElementById("spinBarrel");
 const revolverImage = document.getElementById("revolver");
 const checkbox = document.getElementById("checkbox");
 const music = new Audio("audio/mafia.mp3");
+
+const images = {};
+
+function preloadImages(imageList) {
+  imageList.forEach(element => {
+    const image = new Image();
+    image.src = "images/" + `${element}.png`;
+    images[element] = image;
+  });
+}
+preloadImages(["Nerf", "NerfShoot", "Revolver", "RevolverShoot"]);
+
 function spinBarrel() {
   playMusic();
   shoot = false;
@@ -59,13 +71,13 @@ function setChildFriendlyMode() {
 }
 function setGunImage() {
   if (childFriendlyMode && shoot) {
-    revolverImage.setAttribute("src", "images/NerfShoot.png");
+    revolverImage.src = images["NerfShoot"].src;
   } else if (childFriendlyMode && !shoot) {
-    revolverImage.setAttribute("src", "images/Nerf.png");
+    revolverImage.src = images["Nerf"].src;
   } else if (!childFriendlyMode && shoot) {
-    revolverImage.setAttribute("src", "images/RevolverShoot.png");
+    revolverImage.src = images["RevolverShoot"].src;
   } else if (!childFriendlyMode && !shoot) {
-    revolverImage.setAttribute("src", "images/Revolver.png");
+    revolverImage.src = images["Revolver"].src;
   }
 }
 function setTitle() {
