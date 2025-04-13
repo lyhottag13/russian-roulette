@@ -98,11 +98,7 @@ function playSFX(name) {
 function muteMusic() {
   musicMuted = !musicMuted;
   document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
-  if (!musicMuted) {
-    music.volume = 1;
-  } else {
-    music.volume = 0;
-  }
+  music.volume = (musicMuted) ? 0 : 1;
 }
 function muteSFX() {
   sfxMuted = !sfxMuted;
