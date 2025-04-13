@@ -2,7 +2,8 @@ let bullet = 0;
 let timesSpun = 0;
 let childFriendlyMode = false;
 let shoot = false;
-let muted = false;
+let musicMuted = false;
+let sfxMuted = false;
 const header = document.getElementById("header");
 const percent = document.getElementById("percent");
 const app = document.getElementById("app");
@@ -15,7 +16,7 @@ function spinBarrel() {
   playMusic();
   shoot = false;
   playSFX("spin");
-  setGun();
+  setGunImage();
   bullet = Math.ceil(Math.random() * 6);
   timesSpun = 0;
   app.innerHTML = "Spin!";
@@ -29,10 +30,10 @@ function pullTrigger() {
     bullet--;
     timesSpun++;
     if (bullet === 0) {
-      pauseMusic();
+      stopMusic();
       playSFX("shot");
       shoot = true;
-      setGun();
+      setGunImage();
       app.innerHTML = "BANG!";
       setDeathText();
       spinBarrelButton.innerHTML = "Insert Bullet & Spin the Barrel!";
@@ -41,7 +42,7 @@ function pullTrigger() {
     } else if (bullet > 0) {
       playSFX("click");
       shoot = false;
-      setGun();
+      setGunImage();
       app.innerHTML = "Click!";
       calculateDeathOdds();
     }
@@ -51,12 +52,12 @@ function calculateDeathOdds() {
   percent.innerHTML = "You have a " + (Math.round((1 / (6 - timesSpun)) * 10000) / 100) + "% chance of dying!";
 }
 function setChildFriendlyMode() {
-  childFriendlyMode = (checkbox.checked) ? true : false;
-  setGun();
+  childFriendlyMode = checkbox.checked;
+  setGunImage();
   setTitle();
   setDeathText();
 }
-function setGun() {
+function setGunImage() {
   if (childFriendlyMode && shoot) {
     revolverImage.setAttribute("src", "images/NerfShoot.png");
   } else if (childFriendlyMode && !shoot) {
@@ -78,25 +79,27 @@ function setDeathText() {
 function playSFX(name) {
   const fileName = (childFriendlyMode) ? "audio/nerf" + name + ".mp3" : "audio/" + name + ".mp3";
   const sfx = new Audio(fileName);
-  if (!muted) {
+  if (!sfxMuted) {
     sfx.play();
   }
 }
-function mute() {
-  muted = !muted;
-  document.getElementById("mute").innerHTML = (muted) ? "Unmute" : "Mute";
-  if (!muted && !shot) {
-    playMusic();
+function muteMusic() {
+  musicMuted = !musicMuted;
+  document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
+  if (!musicMuted) {
+    music.volume = 1;
   } else {
-    pauseMusic();
+    music.volume = 0;
   }
+}
+function muteSFX() {
+  sfxMuted = !sfxMuted;
+  document.getElementById("muteSFX").innerHTML = (sfxMuted) ? "Unmute SFX" : "Mute SFX";
 }
 function playMusic() {
-  if (!muted) {
-    music.play();
-  }
+  music.play();
 }
-function pauseMusic() {
+function stopMusic() {
   music.pause();
   music.currentTime = 0;
 }
