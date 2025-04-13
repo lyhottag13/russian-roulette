@@ -13,6 +13,8 @@ const spinBarrelButton = document.getElementById("spinBarrel");
 const revolverImage = document.getElementById("revolver");
 const checkbox = document.getElementById("checkbox");
 const music = new Audio("audio/mafia.mp3");
+music.preload = "auto";
+music.load();
 const sfx = new Audio();
 
 const images = {};
@@ -36,6 +38,10 @@ function preloadImages(imageList) {
 }
 preloadImages(["Nerf", "NerfShoot", "Revolver", "RevolverShoot"]);
 preloadSFX(["click", "nerfclick", "nerfshot", "nerfspin", "shot", "spin"]);
+
+window.onload = () => {
+    checkbox.checked = false;
+};
 
 function spinBarrel() {
   playMusic();
