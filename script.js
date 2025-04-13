@@ -2,6 +2,7 @@ let bullet = 0;
 let timesSpun = 0;
 let childFriendlyMode = false;
 let shoot = false;
+let muted = false;
 const header = document.getElementById("header");
 const percent = document.getElementById("percent");
 const app = document.getElementById("app");
@@ -13,7 +14,7 @@ const music = new Audio("audio/mafia.mp3");
 function spinBarrel() {
   playMusic();
   shoot = false;
-  playSpin();
+  playSFX("spin");
   setGun();
   bullet = Math.ceil(Math.random() * 6);
   timesSpun = 0;
@@ -29,7 +30,7 @@ function pullTrigger() {
     timesSpun++;
     if (bullet === 0) {
       pauseMusic();
-      playGunshot();
+      playSFX("shot");
       shoot = true;
       setGun();
       app.innerHTML = "BANG!";
@@ -38,7 +39,7 @@ function pullTrigger() {
       pullTriggerButton.disabled = true;
 
     } else if (bullet > 0) {
-      playClick();
+      playSFX("click");
       shoot = false;
       setGun();
       app.innerHTML = "Click!";
@@ -74,20 +75,26 @@ function setDeathText() {
     percent.innerHTML = (childFriendlyMode) ? "You nerf or nothinged!" : "You died!";
   }
 }
-function playGunshot() {
-  const gunshot = (childFriendlyMode) ? new Audio("audio/nerfshot.mp3") : new Audio("audio/gunshot.mp3");
-  gunshot.play();
+function playSFX(name) {
+  const fileName = (childFriendlyMode) ? "audio/nerf" + name + ".mp3" : "audio/" + name + ".mp3";
+  const sfx = new Audio(fileName);
+  if (!muted) {
+    sfx.play();
+  }
 }
-function playClick() {
-  const click = (childFriendlyMode) ? new Audio("audio/nerfclick.mp3") : new Audio("audio/click.mp3");
-  click.play();
-}
-function playSpin() {
-  const spin = (childFriendlyMode) ? new Audio("audio/nerfspin.mp3") : new Audio("audio/spin.mp3");
-  spin.play();
+function mute() {
+  muted = !muted;
+  document.getElementById("mute").innerHTML = (muted) ? "Unmute" : "Mute";
+  if (!muted && !shot) {
+    playMusic();
+  } else {
+    pauseMusic();
+  }
 }
 function playMusic() {
-  music.play();
+  if (!muted) {
+    music.play();
+  }
 }
 function pauseMusic() {
   music.pause();
