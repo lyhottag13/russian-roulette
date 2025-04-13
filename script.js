@@ -102,9 +102,10 @@ function setDeathText() {
   }
 }
 function playSFX(name) {
-  sfx.src = (childFriendlyMode) ? audio["nerf" + name].src : audio[name].src;
+  const fileName = (childFriendlyMode) ? "nerf" + name : name;
   if (!sfxMuted) {
-    sfx.play();
+    audio[fileName].currentTime = 0;
+    audio[fileName].play();
   }
 }
 function muteMusic() {
