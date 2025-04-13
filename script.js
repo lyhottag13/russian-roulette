@@ -7,6 +7,7 @@ let sfxMuted = false;
 const header = document.getElementById("header");
 const percent = document.getElementById("percent");
 const app = document.getElementById("app");
+const test = document.getElementById("test");
 const pullTriggerButton = document.getElementById("pullTrigger");
 const spinBarrelButton = document.getElementById("spinBarrel");
 const revolverImage = document.getElementById("revolver");
@@ -99,6 +100,8 @@ function muteMusic() {
   musicMuted = !musicMuted;
   document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
   music.volume = (musicMuted) ? 0 : 1;
+  test.innerHTML = (musicMuted) ? "Music Muted" : "NOPE";
+  test.innerHTML += music.volume;
 }
 function muteSFX() {
   sfxMuted = !sfxMuted;
