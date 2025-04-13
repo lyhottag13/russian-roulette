@@ -30,7 +30,7 @@ function pullTrigger() {
       shoot = true;
       setGun();
       app.innerHTML = "BANG!";
-      percent.innerHTML = "You died!";
+      setDeathText();
       spinBarrelButton.innerHTML = "Insert Bullet & Spin the Barrel!";
       pullTriggerButton.disabled = true;
 
@@ -49,7 +49,8 @@ function calculateDeathOdds() {
 function setChildFriendlyMode() {
   childFriendlyMode = (checkbox.checked) ? true : false;
   setGun();
-  updateTitle();
+  setTitle();
+  setDeathText();
 }
 function setGun() {
   if (childFriendlyMode && shoot) {
@@ -62,8 +63,13 @@ function setGun() {
     revolverImage.setAttribute("src", "images/Revolver.png");
   }
 }
-function updateTitle() {
+function setTitle() {
   header.innerHTML = (childFriendlyMode) ? "Nerf Roulette Simulator!" : "Russian Roulette Simulator!"
+}
+function setDeathText() {
+  if (shoot) {
+    percent.innerHTML = (childFriendlyMode) ? "You nerfed!" : "You died!";
+  }
 }
 function playGunshot() {
   const gunshot = (childFriendlyMode) ? new Audio("audio/nerfshot.mp3") : new Audio("audio/gunshot.mp3");
