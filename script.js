@@ -13,9 +13,19 @@ const spinBarrelButton = document.getElementById("spinBarrel");
 const revolverImage = document.getElementById("revolver");
 const checkbox = document.getElementById("checkbox");
 const music = new Audio("audio/mafia.mp3");
+const sfx = new Audio();
 
 const images = {};
+const audio = {};
 
+function preloadSFX(audioList) {
+    audioList.forEach(element => {
+        const audioItem = new Audio();
+        audioItem.src = "audio/" + `${element}.mp3`;
+        audioItem.preload = "auto";
+        audio[element] = audioItem;
+    })
+}
 function preloadImages(imageList) {
   imageList.forEach(element => {
     const image = new Image();
@@ -24,6 +34,7 @@ function preloadImages(imageList) {
   });
 }
 preloadImages(["Nerf", "NerfShoot", "Revolver", "RevolverShoot"]);
+preloadSFX(["click", "nerfclick", "nerfshot", "nerfspin", "shot", "spin"]);
 
 function spinBarrel() {
   playMusic();
@@ -90,8 +101,7 @@ function setDeathText() {
   }
 }
 function playSFX(name) {
-  const fileName = (childFriendlyMode) ? "audio/nerf" + name + ".mp3" : "audio/" + name + ".mp3";
-  const sfx = new Audio(fileName);
+  sfx.src = (childFriendlyMode) ? audio["nerf" + name].src : audio[name].src;
   if (!sfxMuted) {
     sfx.play();
   }
