@@ -9,6 +9,7 @@ h1 {
     color:white;
 }
 #images {
+    padding-left: 80px;
     text-align: center;
 }
 #buttons {
@@ -17,6 +18,10 @@ h1 {
     button {
         font-family: 'Courier New', Courier, monospace;
     }
+}
+#checkbox {
+    padding-top: 20px;
+    text-align: center;
 }
 #text {
     font-family: cursive;

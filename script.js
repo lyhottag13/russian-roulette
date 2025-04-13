@@ -1,38 +1,79 @@
 let bullet = 0;
 let timesSpun = 0;
-let percent = document.getElementById("percent");
-let app = document.getElementById("app");
-let pullTriggerButton = document.getElementById("pullTrigger");
-let spinBarrelButton = document.getElementById("spinBarrel");
-let revolverImage = document.getElementById("revolver");
+let childFriendlyMode = false;
+let shoot = false;
+const header = document.getElementById("header");
+const percent = document.getElementById("percent");
+const app = document.getElementById("app");
+const pullTriggerButton = document.getElementById("pullTrigger");
+const spinBarrelButton = document.getElementById("spinBarrel");
+const revolverImage = document.getElementById("revolver");
+const checkbox = document.getElementById("checkbox");
 function spinBarrel() {
-    bullet = Math.ceil(Math.random() * 6);
-    timesSpun = 0;
-    app.innerHTML = "Spin!";
-    spinBarrelButton.innerHTML = "Spin the Barrel!";
-    calculateDeathOdds();
-    
+  shoot = false;
+  playSpin();
+  setGun();
+  bullet = Math.ceil(Math.random() * 6);
+  timesSpun = 0;
+  app.innerHTML = "Spin!";
+  spinBarrelButton.innerHTML = "Spin the Barrel!";
+  pullTriggerButton.disabled = false;
+  calculateDeathOdds();
+
 }
 function pullTrigger() {
-    if (bullet > 0) {
-        bullet--;
-        timesSpun++;
-        if (bullet === 0) {
-            revolverImage.setAttribute("src", "images/RevolverShoot.png");
-            app.innerHTML = "BANG!";
-            percent.innerHTML = "You died!";
-            spinBarrelButton.innerHTML = "Insert Bullet & Spin the Barrel!";
-        } else if (bullet > 0) {
-            revolverImage.setAttribute("src", "images/Revolver.png");
-            app.innerHTML = "Click!";
-            calculateDeathOdds();
-        }
-    } else {
-        revolverImage.setAttribute("src", "images/Revolver.png");
-        app.innerHTML = "Click!";
-        percent.innerHTML = "You have a 0% chance of dying!";
+  if (bullet > 0) {
+    bullet--;
+    timesSpun++;
+    if (bullet === 0) {
+      playGunshot();
+      shoot = true;
+      setGun();
+      app.innerHTML = "BANG!";
+      percent.innerHTML = "You died!";
+      spinBarrelButton.innerHTML = "Insert Bullet & Spin the Barrel!";
+      pullTriggerButton.disabled = true;
+
+    } else if (bullet > 0) {
+      playClick();
+      shoot = false;
+      setGun();
+      app.innerHTML = "Click!";
+      calculateDeathOdds();
     }
+  }
 }
 function calculateDeathOdds() {
-    percent.innerHTML = "You have a " + (Math.round((1 / (6 - timesSpun)) * 10000) / 100) + "% chance of dying!";
+  percent.innerHTML = "You have a " + (Math.round((1 / (6 - timesSpun)) * 10000) / 100) + "% chance of dying!";
+}
+function setChildFriendlyMode() {
+  childFriendlyMode = (checkbox.checked) ? true : false;
+  setGun();
+  updateTitle();
+}
+function setGun() {
+  if (childFriendlyMode && shoot) {
+    revolverImage.setAttribute("src", "images/NerfShoot.png");
+  } else if (childFriendlyMode && !shoot) {
+    revolverImage.setAttribute("src", "images/Nerf.png");
+  } else if (!childFriendlyMode && shoot) {
+    revolverImage.setAttribute("src", "images/RevolverShoot.png");
+  } else if (!childFriendlyMode && !shoot) {
+    revolverImage.setAttribute("src", "images/Revolver.png");
+  }
+}
+function updateTitle() {
+  header.innerHTML = (childFriendlyMode) ? "Nerf Roulette Simulator!" : "Russian Roulette Simulator!"
+}
+function playGunshot() {
+  const gunshot = (childFriendlyMode) ? new Audio("audio/nerfshot.mp3") : new Audio("audio/gunshot.mp3");
+  gunshot.play();
+}
+function playClick() {
+  const click = (childFriendlyMode) ? new Audio("audio/nerfclick.mp3") : new Audio("audio/click.mp3");
+  click.play();
+}
+function playSpin() {
+  const spin = (childFriendlyMode) ? new Audio("audio/nerfspin.mp3") : new Audio("audio/spin.mp3");
+  spin.play();
 }

@@ -2,26 +2,30 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Schedule Creator</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Russian Roulette Simulator</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <h1 style="text-align: center;">Russian Roulette Simulator!</h1>
-    <div id="images">
-        <img src="images/Revolver.png" style="width:300px;" id="revolver">
-    </div>
-    <div id="text">
-        <div id="app"></div>
-        <div id="percent"></div>
-    </div>
-    <div id="buttons">
-        <button onclick="spinBarrel()" id="spinBarrel">Insert Bullet & Spin the Barrel!</button>
-        <br><br>
-        <button onclick="pullTrigger()" id="pullTrigger">Pull the Trigger!</button>
-    </div>
-    <script src="script.js"></script>
+  <h1 id="header">Russian Roulette Simulator!</h1>
+  <div id="images">
+    <img src="images/Revolver.png" style="width:300px;" id="revolver">
+  </div>
+  <div id="text">
+    <div id="app"></div>
+    <div id="percent"></div>
+  </div>
+  <div id="buttons">
+    <button onclick="spinBarrel()" id="spinBarrel">Insert Bullet & Spin the Barrel!</button>
+    <br><br>
+    <button onclick="pullTrigger()" id="pullTrigger" disabled="true">Pull the Trigger!</button>
+    <br><br>
+    <label>
+      <input onchange="setChildFriendlyMode()" type="checkbox" id="checkbox">Child-friendly mode
+    </label>
+  </div>
+  <script src="script.js"></script>
 </body>
 
 </html>
