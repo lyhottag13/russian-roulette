@@ -97,11 +97,7 @@ function playSFX(name) {
   }
 }
 function muteMusic() {
-  musicMuted = !musicMuted;
-  document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
-  music.volume = (musicMuted) ? 0 : 1;
-  test.innerHTML = (musicMuted) ? "Music Muted" : "NOPE";
-  test.innerHTML += music.volume;
+
 }
 function muteSFX() {
   sfxMuted = !sfxMuted;
@@ -114,3 +110,10 @@ function stopMusic() {
   music.pause();
   music.currentTime = 0;
 }
+document.getElementById("muteMusic").addEventListener("click", () => {
+    musicMuted = !musicMuted;
+    document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
+    music.volume = (musicMuted) ? 0 : 1;
+    test.innerHTML = (musicMuted) ? "Music Muted" : "NOPE";
+    test.innerHTML += music.volume;
+})
