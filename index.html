@@ -22,16 +22,16 @@
         <div id="percent"><br></div>
     </div>
     <div id="buttons">
-        <button onclick="spinBarrel()" id="spinBarrel">Insert Bullet & Spin the Barrel!</button>
+        <button onpointerdown="spinBarrel()" id="spinBarrel">Insert Bullet & Spin the Barrel!</button>
         <br><br>
-        <button onclick="pullTrigger()" id="pullTrigger" disabled="true">Pull the Trigger!</button>
+        <button onpointerdown="pullTrigger()" id="pullTrigger" disabled="true">Pull the Trigger!</button>
         <br><br>
         <label>
             <input onchange="setChildFriendlyMode()" type="checkbox" id="checkbox">Child-Friendly Mode
         </label>
         <br><br>
-        <button onclick="muteSFX()" id="muteSFX">Mute SFX</button>
-        <button onclick="muteMusic()" id="muteMusic">Mute Music</button>
+        <button onpointerdown="muteSFX()" id="muteSFX">Mute SFX</button>
+        <button onpointerdown="muteMusic()" id="muteMusic">Mute Music</button>
     </div>
     <script src="script.js"></script>
 </body>

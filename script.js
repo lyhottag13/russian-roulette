@@ -26,6 +26,7 @@ function preloadSFX(audioList) {
         audioItem.src = "audio/" + `${element}.mp3`;
         audioItem.preload = "auto";
         audioItem.load();
+        audioItem.crossOrigin = "anonymous";
         audio[element] = audioItem;
     })
 }
