@@ -53,9 +53,9 @@ window.onload = () => {
   checkbox.checked = false;
 };
 document.getElementById("spinBarrel").addEventListener("pointerdown", () => {
-  player.playBackgroundMusic("mafia.mp3");
+  player.playBackgroundMusic("audio/mafia.mp3");
   currentlyShooting = false;
-  player.play((childFriendlyMode) ? "nerfspin" : "spin");
+  playSFX("spin");
   setGunImage();
   bullet = Math.ceil(Math.random() * 6);
   timesSpun = 0;
@@ -70,8 +70,8 @@ document.getElementById("pullTrigger").addEventListener("pointerdown", () => {
     timesSpun++;
     if (bullet === 0) {
       player.stopBackgroundMusic();
-      player.play((childFriendlyMode) ? "nerfshot" : "shot");
       currentlyShooting = true;
+      playSFX("shot");
       setGunImage();
       app.innerHTML = "BANG!";
       setDeathText();
@@ -79,7 +79,7 @@ document.getElementById("pullTrigger").addEventListener("pointerdown", () => {
       pullTriggerButton.disabled = true;
 
     } else if (bullet > 0) {
-      player.play((childFriendlyMode) ? "nerfclick" : "click");
+      playSFX("click");
       currentlyShooting = false;
       setGunImage();
       app.innerHTML = "Click!";
@@ -115,15 +115,13 @@ function setDeathText() {
     percent.innerHTML = (childFriendlyMode) ? "You nerf or nothinged!" : "You died!";
   }
 }
-function playSFX(name) {
-  const fileName = (childFriendlyMode) ? "nerf" + name : name;
-  if (!sfxMuted) {
-    audio[fileName].currentTime = 0;
-    audio[fileName].play();
-  }
-}
 document.getElementById("muteMusic").addEventListener("pointerdown", () => {
   musicMuted = !musicMuted;
+  if (musicMuted) {
+    player.stopBackgroundMusic();
+  } else {
+    player.playBackgroundMusic("audio/mafia.mp3");
+  }
   document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
   music.volume = (musicMuted) ? 0 : 1;
 });
@@ -131,6 +129,11 @@ document.getElementById("muteSFX").addEventListener("pointerdown", () => {
   sfxMuted = !sfxMuted;
   document.getElementById("muteSFX").innerHTML = (sfxMuted) ? "Unmute SFX" : "Mute SFX";
 });
+function playSFX(name) {
+  if (!sfxMuted) {
+    player.play((childFriendlyMode) ? "nerf" + name : name);
+  }
+}
 function playMusic() {
   music.play();
 }

@@ -16,10 +16,10 @@ export class SoundPlayer {
     }
     async playBackgroundMusic(url) {
         if (this.isBackgroundMusicPlaying) {
-            this.stopBackgroundMusic();
+            return;
         }
         if (!this.backgroundMusicBuffer) {
-            await this.preloadSound('backgroundMusic', url);
+            await this.load('backgroundMusic', url);
             this.backgroundMusicBuffer = this.buffers['backgroundMusic'];
         }
 
