@@ -11,31 +11,18 @@ const player = new SoundPlayer();
 const header = document.getElementById("header");
 const percent = document.getElementById("percent");
 const app = document.getElementById("app");
-const test = document.getElementById("test");
 const pullTriggerButton = document.getElementById("pullTrigger");
 const spinBarrelButton = document.getElementById("spinBarrel");
 const revolverImage = document.getElementById("revolver");
 const checkbox = document.getElementById("checkbox");
-const sfx = new Audio();
 
 const images = {};
-const audio = {};
 const preloads = ["click", "nerfclick", "nerfshot", "nerfspin", "shot", "spin", "mafia"];
 
 preloads.forEach(element => {
   player.load(element, "audio/" + element + ".mp3");
 });
 
-function preloadSFX(audioList) {
-  audioList.forEach(element => {
-    const audioItem = new Audio();
-    audioItem.src = "audio/" + `${element}.mp3`;
-    audioItem.preload = "auto";
-    audioItem.load();
-    audioItem.crossOrigin = "anonymous";
-    audio[element] = audioItem;
-  })
-}
 function preloadImages(imageList) {
   imageList.forEach(element => {
     const image = new Image();
@@ -44,7 +31,6 @@ function preloadImages(imageList) {
   });
 }
 preloadImages(["Nerf", "NerfShoot", "Revolver", "RevolverShoot"]);
-preloadSFX(["click", "nerfclick", "nerfshot", "nerfspin", "shot", "spin"]);
 
 window.onload = () => {
   checkbox.checked = false;
@@ -120,7 +106,6 @@ document.getElementById("muteMusic").addEventListener("pointerdown", () => {
     player.unmuteBackgroundMusic();
   }
   document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
-  // music.volume = (musicMuted) ? 0 : 1;
 });
 document.getElementById("muteSFX").addEventListener("pointerdown", () => {
   sfxMuted = !sfxMuted;

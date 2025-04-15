@@ -2,32 +2,43 @@ p {
     font-family: Georgia, 'Times New Roman', Times, serif;
     background-color: rgb(207, 255, 207);
 }
-h1 {
+#header {
     text-align: center;
-    font-size: 40px;
+    font-size: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: firebrick;
     color:rgb(255, 255, 255);
 }
+#home {
+    border: solid black;
+    border-radius: 30px;
+    margin: 0 auto;
+    width: 50px;
+    padding: 10px;
+    transition: all 0.05s ease;
+}
+#home:hover {
+    background-color: rgb(212, 212, 255);
+    filter: sepia(500%) hue-rotate(30deg);
+    box-shadow: 5px 5px 10px black;
+}
 #images {
     padding-left: 80px;
     text-align: center;
-    #revolver {
-        width:300px;
-    }
+}
+#images #revolver {
+    width: 300px;
 }
 #buttons {
     align-items: center;
     text-align: center;
-    button {
-        font-size: 20px;
-        height: 40px;
-        font-family: 'Courier New', Courier, monospace;
-    }
+}
+#buttons button {
+    font-size: 20px;
+    height: 40px;
+    font-family: 'Courier New', Courier, monospace;
 }
 #checkbox {
-    font-size: large;
-    padding-top: 20px;
     text-align: center;
 }
 #text {
