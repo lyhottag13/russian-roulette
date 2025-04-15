@@ -15,12 +15,11 @@ export class SoundPlayer {
         const audioBuffer = await this.audioContext.decodeAudioData(arrayBuffer);
         this.buffers[name] = audioBuffer;
     }
-    async playBackgroundMusic(url) {
+    async playBackgroundMusic() {
         if (this.isBackgroundMusicPlaying) {
             return;
         }
         if (!this.backgroundMusicBuffer) {
-            await this.load('backgroundMusic', url);
             this.backgroundMusicBuffer = this.buffers['backgroundMusic'];
         }
 

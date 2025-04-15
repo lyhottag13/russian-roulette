@@ -19,6 +19,8 @@ const checkbox = document.getElementById("checkbox");
 const images = {};
 const preloads = ["click", "nerfclick", "nerfshot", "nerfspin", "shot", "spin", "mafia"];
 
+player.load("backgroundMusic", "audio/mafia.mp3");
+
 preloads.forEach(element => {
   player.load(element, "audio/" + element + ".mp3");
 });
@@ -118,6 +120,6 @@ function playSFX(name) {
 }
 function playMusic() {
   if (!musicMuted) {
-    player.playBackgroundMusic("audio/mafia.mp3");
+    player.playBackgroundMusic();
   }
 }
