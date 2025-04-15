@@ -42,8 +42,8 @@ document.getElementById("spinBarrel").addEventListener("pointerdown", () => {
   setGunImage();
   bullet = Math.ceil(Math.random() * 6);
   timesSpun = 0;
-  app.innerHTML = "Spin!";
-  spinBarrelButton.innerHTML = "Spin the Barrel!";
+  app.textContent = "Spin!";
+  spinBarrelButton.textContent = "Spin the Barrel!";
   pullTriggerButton.disabled = false;
   calculateDeathOdds();
 });
@@ -59,12 +59,11 @@ document.getElementById("pullTrigger").addEventListener("pointerdown", () => {
     setDeathText();
     spinBarrelButton.textContent = "Insert Bullet & Spin the Barrel!";
     pullTriggerButton.disabled = true;
-
-  } else {
+  } else if (bullet > 0) {
     playSFX("click");
     currentlyShooting = false;
     setGunImage();
-    app.innerHTML = "Click!";
+    app.textContent = "Click!";
     calculateDeathOdds();
   }
 });
@@ -106,11 +105,11 @@ document.getElementById("muteMusic").addEventListener("pointerdown", () => {
   } else {
     player.unmuteBackgroundMusic();
   }
-  document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
+  document.getElementById("muteMusic").textContent = (musicMuted) ? "Unmute Music" : "Mute Music";
 });
 document.getElementById("muteSFX").addEventListener("pointerdown", () => {
   sfxMuted = !sfxMuted;
-  document.getElementById("muteSFX").innerHTML = (sfxMuted) ? "Unmute SFX" : "Mute SFX";
+  document.getElementById("muteSFX").textContent = (sfxMuted) ? "Unmute SFX" : "Mute SFX";
 });
 function playSFX(name) {
   if (!sfxMuted) {
