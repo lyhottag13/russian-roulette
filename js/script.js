@@ -16,9 +16,6 @@ const pullTriggerButton = document.getElementById("pullTrigger");
 const spinBarrelButton = document.getElementById("spinBarrel");
 const revolverImage = document.getElementById("revolver");
 const checkbox = document.getElementById("checkbox");
-const music = new Audio("audio/mafia.mp3");
-music.preload = "auto";
-music.load();
 const sfx = new Audio();
 
 const images = {};
@@ -53,7 +50,7 @@ window.onload = () => {
   checkbox.checked = false;
 };
 document.getElementById("spinBarrel").addEventListener("pointerdown", () => {
-  player.playBackgroundMusic("audio/mafia.mp3");
+  playMusic();
   currentlyShooting = false;
   playSFX("spin");
   setGunImage();
@@ -118,12 +115,12 @@ function setDeathText() {
 document.getElementById("muteMusic").addEventListener("pointerdown", () => {
   musicMuted = !musicMuted;
   if (musicMuted) {
-    player.stopBackgroundMusic();
+    player.muteBackgroundMusic();
   } else {
-    player.playBackgroundMusic("audio/mafia.mp3");
+    player.unmuteBackgroundMusic();
   }
   document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
-  music.volume = (musicMuted) ? 0 : 1;
+  // music.volume = (musicMuted) ? 0 : 1;
 });
 document.getElementById("muteSFX").addEventListener("pointerdown", () => {
   sfxMuted = !sfxMuted;
@@ -135,9 +132,7 @@ function playSFX(name) {
   }
 }
 function playMusic() {
-  music.play();
-}
-function stopMusic() {
-  music.pause();
-  music.currentTime = 0;
+  if (!musicMuted) {
+    player.playBackgroundMusic("audio/mafia.mp3");
+  }
 }

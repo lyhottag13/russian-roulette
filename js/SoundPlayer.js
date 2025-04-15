@@ -6,6 +6,7 @@ export class SoundPlayer {
         this.backgroundMusicSource = null;
         this.backgroundMusicBuffer = null;
         this.isBackgroundMusicPlaying = false;
+        this.gainNode = null;
     }
 
     async load(name, url) {
@@ -28,6 +29,9 @@ export class SoundPlayer {
         this.backgroundMusicSource.buffer = this.backgroundMusicBuffer;
         this.backgroundMusicSource.loop = true; // Loop the background music
         this.backgroundMusicSource.connect(this.audioContext.destination);
+        this.gainNode = this.audioContext.createGain();
+        this.backgroundMusicSource.connect(this.gainNode);
+        this.gainNode.connect(this.audioContext.destination);
         this.backgroundMusicSource.start();
         this.isBackgroundMusicPlaying = true; // Track that music is playing
     }
@@ -37,6 +41,16 @@ export class SoundPlayer {
             this.backgroundMusicSource = null; // Reset the source
             this.isBackgroundMusicPlaying = false; // Track that music is no longer playing
         }
+    }
+    muteBackgroundMusic() {
+        if (this.gainNode) {
+            this.gainNode.gain.setValueAtTime(-1, this.audioContext.currentTime);
+        }
+    }
+    unmuteBackgroundMusic() {
+        if (this.gainNode) {
+            this.gainNode.gain.setValueAtTime(1, this.audioContext.currentTime);
+        }    
     }
     play(name) {
         if (this.audioContext.state === 'suspended') {
