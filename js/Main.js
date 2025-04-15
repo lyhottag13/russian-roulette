@@ -48,54 +48,55 @@ document.getElementById("spinBarrel").addEventListener("pointerdown", () => {
   calculateDeathOdds();
 });
 document.getElementById("pullTrigger").addEventListener("pointerdown", () => {
-  if (bullet > 0) {
-    bullet--;
-    timesSpun++;
-    if (bullet === 0) {
-      player.stopBackgroundMusic();
-      currentlyShooting = true;
-      playSFX("shot");
-      setGunImage();
-      app.innerHTML = "BANG!";
-      setDeathText();
-      spinBarrelButton.innerHTML = "Insert Bullet & Spin the Barrel!";
-      pullTriggerButton.disabled = true;
+  bullet--;
+  timesSpun++;
+  if (bullet === 0) {
+    player.stopBackgroundMusic();
+    currentlyShooting = true;
+    playSFX("shot");
+    setGunImage();
+    app.textContent = "BANG!";
+    setDeathText();
+    spinBarrelButton.textContent = "Insert Bullet & Spin the Barrel!";
+    pullTriggerButton.disabled = true;
 
-    } else if (bullet > 0) {
-      playSFX("click");
-      currentlyShooting = false;
-      setGunImage();
-      app.innerHTML = "Click!";
-      calculateDeathOdds();
-    }
+  } else {
+    playSFX("click");
+    currentlyShooting = false;
+    setGunImage();
+    app.innerHTML = "Click!";
+    calculateDeathOdds();
   }
 });
 function calculateDeathOdds() {
-  percent.innerHTML = "You have a " + (Math.round((1 / (6 - timesSpun)) * 10000) / 100) + "% chance of dying!";
+  percent.textContent = "You have a " + (Math.round((1 / (6 - timesSpun)) * 10000) / 100) + "% chance of dying!";
 }
 checkbox.addEventListener("change", () => {
   childFriendlyMode = checkbox.checked;
   setGunImage();
   setTitle();
   setDeathText();
+  setGameText();
 });
-function setGunImage() {
-  if (childFriendlyMode && currentlyShooting) {
-    revolverImage.src = images["NerfShoot"].src;
-  } else if (childFriendlyMode && !currentlyShooting) {
-    revolverImage.src = images["Nerf"].src;
-  } else if (!childFriendlyMode && currentlyShooting) {
-    revolverImage.src = images["RevolverShoot"].src;
-  } else if (!childFriendlyMode && !currentlyShooting) {
-    revolverImage.src = images["Revolver"].src;
+function setGameText() {
+  const text = percent.textContent;
+  if (text.endsWith("dying!")) {
+    percent.textContent = text.replace("dying!", "nerfing!");
+  } else if (text.endsWith("nerfing!")) {
+    percent.textContent = text.replace("nerfing!", "dying!")
   }
 }
+function setGunImage() {
+  const childFriendly = (childFriendlyMode) ? "Nerf" : "Revolver";
+  const state = (currentlyShooting) ? "Shoot" : "";
+  revolverImage.src = images[childFriendly + state].src;
+}
 function setTitle() {
-  header.innerHTML = (childFriendlyMode) ? "Nerf Roulette Simulator!" : "Russian Roulette Simulator!"
+  header.querySelector("h1").textContent = (childFriendlyMode) ? "Nerf Roulette Simulator!" : "Russian Roulette Simulator!"
 }
 function setDeathText() {
   if (currentlyShooting) {
-    percent.innerHTML = (childFriendlyMode) ? "You nerf or nothinged!" : "You died!";
+    percent.textContent = (childFriendlyMode) ? "You nerf or nothinged!" : "You died!";
   }
 }
 document.getElementById("muteMusic").addEventListener("pointerdown", () => {
@@ -113,7 +114,7 @@ document.getElementById("muteSFX").addEventListener("pointerdown", () => {
 });
 function playSFX(name) {
   if (!sfxMuted) {
-    player.play((childFriendlyMode) ? "nerf" + name : name);
+    player.play((childFriendlyMode) ? `nerf${name}` : name);
   }
 }
 function playMusic() {
