@@ -1,9 +1,13 @@
+import { SoundPlayer } from "./SoundPlayer.js";
+
 let bullet = 0;
 let timesSpun = 0;
 let childFriendlyMode = false;
 let shoot = false;
 let musicMuted = false;
 let sfxMuted = false;
+
+const player = new SoundPlayer();
 const header = document.getElementById("header");
 const percent = document.getElementById("percent");
 const app = document.getElementById("app");
@@ -20,15 +24,19 @@ const sfx = new Audio();
 const images = {};
 const audio = {};
 
+preloadSound(name, url) {
+  // const sound = new Audio
+}
+
 function preloadSFX(audioList) {
-    audioList.forEach(element => {
-        const audioItem = new Audio();
-        audioItem.src = "audio/" + `${element}.mp3`;
-        audioItem.preload = "auto";
-        audioItem.load();
-        audioItem.crossOrigin = "anonymous";
-        audio[element] = audioItem;
-    })
+  audioList.forEach(element => {
+    const audioItem = new Audio();
+    audioItem.src = "audio/" + `${element}.mp3`;
+    audioItem.preload = "auto";
+    audioItem.load();
+    audioItem.crossOrigin = "anonymous";
+    audio[element] = audioItem;
+  })
 }
 function preloadImages(imageList) {
   imageList.forEach(element => {
@@ -41,10 +49,9 @@ preloadImages(["Nerf", "NerfShoot", "Revolver", "RevolverShoot"]);
 preloadSFX(["click", "nerfclick", "nerfshot", "nerfspin", "shot", "spin"]);
 
 window.onload = () => {
-    checkbox.checked = false;
+  checkbox.checked = false;
 };
-
-function spinBarrel() {
+document.getElementById("spinBarrel").addEventListener("pointerdown", () => {
   playMusic();
   shoot = false;
   playSFX("spin");
@@ -55,9 +62,8 @@ function spinBarrel() {
   spinBarrelButton.innerHTML = "Spin the Barrel!";
   pullTriggerButton.disabled = false;
   calculateDeathOdds();
-
-}
-function pullTrigger() {
+});
+document.getElementById("pullTrigger").addEventListener("pointerdown", () => {
   if (bullet > 0) {
     bullet--;
     timesSpun++;
@@ -79,16 +85,16 @@ function pullTrigger() {
       calculateDeathOdds();
     }
   }
-}
+});
 function calculateDeathOdds() {
   percent.innerHTML = "You have a " + (Math.round((1 / (6 - timesSpun)) * 10000) / 100) + "% chance of dying!";
 }
-function setChildFriendlyMode() {
+checkbox.addEventListener("change", () => {
   childFriendlyMode = checkbox.checked;
   setGunImage();
   setTitle();
   setDeathText();
-}
+});
 function setGunImage() {
   if (childFriendlyMode && shoot) {
     revolverImage.src = images["NerfShoot"].src;
@@ -115,15 +121,15 @@ function playSFX(name) {
     audio[fileName].play();
   }
 }
-function muteMusic() {
-    musicMuted = !musicMuted;
-    document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
-    music.volume = (musicMuted) ? 0 : 1;
-}
-function muteSFX() {
+document.getElementById("muteMusic").addEventListener("pointerdown", () => {
+  musicMuted = !musicMuted;
+  document.getElementById("muteMusic").innerHTML = (musicMuted) ? "Unmute Music" : "Mute Music";
+  music.volume = (musicMuted) ? 0 : 1;
+});
+document.getElementById("muteSFX").addEventListener("pointerdown", () => {
   sfxMuted = !sfxMuted;
   document.getElementById("muteSFX").innerHTML = (sfxMuted) ? "Unmute SFX" : "Mute SFX";
-}
+});
 function playMusic() {
   music.play();
 }
