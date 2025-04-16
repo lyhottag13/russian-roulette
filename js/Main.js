@@ -1,5 +1,5 @@
 import { SoundPlayer } from "./SoundPlayer.js";
-
+import { Chamber } from "./Chamber.js";
 let bullet = 0;
 let timesSpun = 0;
 let childFriendlyMode = false;
@@ -7,6 +7,7 @@ let currentlyShooting = false;
 let musicMuted = false;
 let sfxMuted = false;
 
+const chamber = new Chamber(document);
 const player = new SoundPlayer();
 const header = document.getElementById("header");
 const percent = document.getElementById("percent");
@@ -18,6 +19,8 @@ const checkbox = document.getElementById("checkbox");
 
 const images = {};
 const preloads = ["click", "nerfclick", "nerfshot", "nerfspin", "shot", "spin", "mafia"];
+
+chamber.drawShape();
 
 player.load("backgroundMusic", "audio/mafia.mp3");
 
