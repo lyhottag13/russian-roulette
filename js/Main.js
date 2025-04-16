@@ -20,7 +20,7 @@ const checkbox = document.getElementById("checkbox");
 const images = {};
 const preloads = ["click", "nerfclick", "nerfshot", "nerfspin", "shot", "spin", "mafia"];
 
-chamber.drawShape();
+chamber.drawBarrel();
 
 player.load("backgroundMusic", "audio/mafia.mp3");
 
@@ -42,6 +42,7 @@ window.onload = () => {
 };
 document.getElementById("spinBarrel").addEventListener("pointerdown", () => {
   playMusic();
+  chamber.spin();
   currentlyShooting = false;
   playSFX("spin");
   setGunImage();
@@ -56,6 +57,7 @@ document.getElementById("pullTrigger").addEventListener("pointerdown", () => {
   bullet--;
   timesSpun++;
   if (bullet === 0) {
+    chamber.click();
     player.stopBackgroundMusic();
     currentlyShooting = true;
     playSFX("shot");
@@ -65,6 +67,7 @@ document.getElementById("pullTrigger").addEventListener("pointerdown", () => {
     spinBarrelButton.textContent = "Insert Bullet & Spin the Barrel!";
     pullTriggerButton.disabled = true;
   } else if (bullet > 0) {
+    chamber.click();
     playSFX("click");
     currentlyShooting = false;
     setGunImage();

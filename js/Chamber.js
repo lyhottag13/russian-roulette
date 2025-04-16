@@ -1,42 +1,56 @@
 export class Chamber {
     constructor(document) {
-        this.chamber = document.getElementById("chamber");
-        this.ctx = chamber.getContext("2d");
+        this.chamber = document.getElementById("chamberGroup");
+        // this.ctx = chamber.getContext("2d");
+        this.angle = 0;
+        this.currentChamber = 0;
         this.CHAMBER_SIZE = 18;
+        this.chambers = new Array(5);
     }
-    drawShape() {
-        this.ctx.beginPath();
-        this.ctx.arc(75, 75, 75, 0, Math.PI * 2, false);
-        this.ctx.fillStyle = "rgb(175, 175, 175)";
-        this.ctx.fill();
-        this.ctx.closePath();
-        this.ctx.fillStyle = "rgb(255, 255, 255)";
-        this.drawChamber(75, 30);
-        this.drawChamber(35, 55);
-        this.drawChamber(35, 100);
-        this.drawChamber(75, 120);
-        this.drawChamber(115, 55);
-        this.drawChamber(115, 100);
+    drawBarrel() {
+        this.createCircle(75, 75, 75, "lightgray");
+        this.drawChamber(75, 30, 0);
+        this.drawChamber(35, 55, 1);
+        this.drawChamber(35, 100, 2);
+        this.drawChamber(75, 120, 3);
+        this.drawChamber(115, 100, 4);
+        this.drawChamber(115, 55, 5);
         // Outside holes
-        this.drawChamber(115, 5);
-        this.drawChamber(160, 75);
-        this.drawChamber(115, 147);
-        this.drawChamber(35, 147);
-        this.drawChamber(-8, 75);
-        this.drawChamber(30, 5);
-        this.drawSpinner(75, 75, 7);
-        this.ctx.closePath();
+        this.drawCircle(115, 5);
+        this.drawCircle(160, 75);
+        this.drawCircle(115, 147);
+        this.drawCircle(35, 147);
+        this.drawCircle(-8, 75);
+        this.drawCircle(30, 5);
     }
-    drawChamber(x, y) {
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, this.CHAMBER_SIZE, 0, Math.PI * 2, false);
-        this.ctx.fill();
-        this.ctx.closePath();
+    spin() {
+        this.currentChamber = 0;
+        this.chambers.forEach(element => {
+            element.setAttribute("fill", "white");
+        });
+        this.angle = 0;
+        document.getElementById("chamberGroup").setAttribute("transform", `rotate(${this.angle} 75 75)`)
     }
-    drawSpinner(x, y, radius) {
-        this.ctx.beginPath();
-        this.ctx.arc(x, y, radius, 0, Math.PI * 2, false);
-        this.ctx.fill();
-        this.ctx.closePath();
+    click() {
+        this.chambers[this.currentChamber].setAttribute("fill", "rgb(255, 21, 21)");
+        this.currentChamber += 1;
+        this.angle += 60;
+        document.getElementById("chamberGroup").setAttribute("transform", `rotate(${this.angle} 75 75)`)
+    }
+    drawChamber(x, y, position) {
+        const circle = this.createCircle(x, y, this.CHAMBER_SIZE, "white");
+        this.chambers[position] = circle;
+    }
+    drawCircle(x, y) {
+        this.createCircle(x, y, this.CHAMBER_SIZE, "white");
+    }
+    createCircle(x, y, radius, color) {
+        const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+        circle.setAttribute("cx", x);
+        circle.setAttribute("cy", y);
+        circle.setAttribute("r", radius);
+        circle.setAttribute("fill", color);
+        this.chamber.appendChild(circle);
+        return circle;
     }
 }
