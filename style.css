@@ -48,6 +48,6 @@ p {
     padding-bottom: 30px;
     color: rgb(0, 0, 0);
 }
-#chamber g {
-    transform: all 0.3s ease;
+#chamberGroup {
+    transition: all 0.2s ease;
 }

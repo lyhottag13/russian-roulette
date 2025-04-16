@@ -7,7 +7,7 @@ let currentlyShooting = false;
 let musicMuted = false;
 let sfxMuted = false;
 
-const chamber = new Chamber(document);
+const chamber = new Chamber();
 const player = new SoundPlayer();
 const header = document.getElementById("header");
 const percent = document.getElementById("percent");
@@ -80,10 +80,12 @@ function calculateDeathOdds() {
 }
 checkbox.addEventListener("change", () => {
   childFriendlyMode = checkbox.checked;
+  chamber.childFriendlyMode = childFriendlyMode;
   setGunImage();
   setTitle();
   setDeathText();
   setGameText();
+  chamber.setCircle();
 });
 function setGameText() {
   const text = percent.textContent;
