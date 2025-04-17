@@ -101,7 +101,8 @@ function setGunImage() {
   revolverImage.src = images[childFriendly + state].src;
 }
 function setTitle() {
-  header.querySelector("h1").textContent = (childFriendlyMode) ? "Nerf Roulette Simulator!" : "Russian Roulette Simulator!"
+  const text = header.querySelector("h1");
+  text.textContent = (childFriendlyMode) ? text.textContent.replace("Russian", "Nerf") : text.textContent.replace("Nerf", "Russian");
 }
 function setDeathText() {
   if (currentlyShooting) {

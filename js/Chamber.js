@@ -39,10 +39,14 @@ export class Chamber {
         this.chamber.style.transform = `rotate(${this.angle}deg)`;
     }
     click(shoot) {
-        this.chambers[this.currentChamber].setAttribute("fill", (shoot) ? this.RED : ((this.childFriendlyMode) ? this.BLUE : this.GREEN));
-        this.currentChamber += 1;
-        this.angle += (shoot) ? 0 : 60;
-        this.chamber.style.transform = `rotate(${this.angle}deg)`;
+        if (shoot) {
+            this.chambers[this.currentChamber].setAttribute("fill", this.RED);
+        } else {
+            this.chambers[this.currentChamber].setAttribute("fill", (this.childFriendlyMode) ? this.BLUE : this.GREEN);
+            this.currentChamber += 1;
+            this.angle += 60;
+            this.chamber.style.transform = `rotate(${this.angle}deg)`;
+        }
     }
     drawChamber(x, y, position) {
         const circle = this.createCircle(x, y, this.CHAMBER_SIZE, "white");

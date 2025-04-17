@@ -14,32 +14,36 @@
 
 <body>
     <div id="header">
-        <h1>Russian Roulette Simulator!</h1>
+        <h1>Russian Roulette!</h1>
     </div>
-    <a href="https://lyhottag13.github.io/" style="padding-left: 50px;">
+    <div id="homeDiv">
+    <a href="https://lyhottag13.github.io/">
         <img id="home" src="images/home.png">
     </a>
-    <div id="images">
-        <svg id="chamber" height="150px" width="150px">
-            <g id="chamberGroup" style="transform:rotate(0deg); transform-origin: 75px 75px;"></g>
-        </svg>
-        <img src="images/Revolver.png" id="revolver">
     </div>
-    <div id="text">
-        <div id="app"><br></div>
-        <div id="percent"><br></div>
-    </div>
-    <div id="buttons">
-        <button id="spinBarrel">Insert Bullet & Spin the Barrel!</button>
-        <br><br>
-        <button id="pullTrigger" disabled="true">Pull the Trigger!</button>
-        <br><br>
-        <label>
-            <input type="checkbox" id="checkbox">Child-Friendly Mode
-        </label>
-        <br><br>
-        <button id="muteSFX">Mute SFX</button>
-        <button id="muteMusic">Mute Music</button>
+    <div id="game">
+        <div id="images">
+            <svg id="chamber" height="150px" width="150px">
+                <g id="chamberGroup" style="transform:rotate(0deg); transform-origin: 75px 75px;"></g>
+            </svg>
+            <img src="images/Revolver.png" id="revolver">
+        </div>
+        <div id="text">
+            <div id="app"><br></div>
+            <div id="percent"><br></div>
+        </div>
+        <div id="buttons">
+            <button id="spinBarrel">Insert Bullet & Spin the Barrel!</button>
+            <br><br>
+            <button id="pullTrigger" disabled="true">Pull the Trigger!</button>
+            <br><br>
+            <label id="checkboxLabel">
+                <input type="checkbox" id="checkbox">Child-Friendly Mode
+            </label>
+            <br><br>
+            <button id="muteSFX">Mute SFX</button>
+            <button id="muteMusic">Mute Music</button>
+        </div>
     </div>
     <script type="module" src="./js/Main.js"></script>
 </body>
