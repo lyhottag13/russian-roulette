@@ -57,7 +57,7 @@ document.getElementById("pullTrigger").addEventListener("pointerdown", () => {
   bullet--;
   timesSpun++;
   if (bullet === 0) {
-    chamber.click();
+    chamber.click(true);
     player.stopBackgroundMusic();
     currentlyShooting = true;
     playSFX("shot");
@@ -67,7 +67,7 @@ document.getElementById("pullTrigger").addEventListener("pointerdown", () => {
     spinBarrelButton.textContent = "Insert Bullet & Spin the Barrel!";
     pullTriggerButton.disabled = true;
   } else if (bullet > 0) {
-    chamber.click();
+    chamber.click(false);
     playSFX("click");
     currentlyShooting = false;
     setGunImage();

@@ -5,8 +5,9 @@ export class Chamber {
         this.angle = 0;
         this.currentChamber = 0;
         this.CHAMBER_SIZE = 18;
-        this.RED = "rgb(255, 21, 21)";
+        this.RED = "rgb(255, 101, 101)";
         this.BLUE = "rgb(50, 159, 209)"
+        this.GREEN = "rgb(74, 165, 86)"
         this.chambers = new Array(5);
         this.mainCircle = null;
         this.childFriendlyMode = false;
@@ -37,10 +38,10 @@ export class Chamber {
         this.angle = this.angle + (360 - this.angle % 360) + 360;
         this.chamber.style.transform = `rotate(${this.angle}deg)`;
     }
-    click() {
-        this.chambers[this.currentChamber].setAttribute("fill", (this.childFriendlyMode) ? this.BLUE : this.RED);
+    click(shoot) {
+        this.chambers[this.currentChamber].setAttribute("fill", (shoot) ? this.RED : ((this.childFriendlyMode) ? this.BLUE : this.GREEN));
         this.currentChamber += 1;
-        this.angle += 60;
+        this.angle += (shoot) ? 0 : 60;
         this.chamber.style.transform = `rotate(${this.angle}deg)`;
     }
     drawChamber(x, y, position) {
@@ -65,10 +66,10 @@ export class Chamber {
     setCircle() {
         this.mainCircle.setAttribute("fill", (this.childFriendlyMode) ? "rgb(226, 224, 89)" : "lightgray");
         this.chambers.forEach(element => {
-            if (element.getAttribute("fill") === this.RED) {
+            if (element.getAttribute("fill") === this.GREEN) {
                 element.setAttribute("fill", this.BLUE);
             } else if (element.getAttribute("fill") === this.BLUE) {
-                element.setAttribute("fill", this.RED);
+                element.setAttribute("fill", this.GREEN);
             }
         })
     }
